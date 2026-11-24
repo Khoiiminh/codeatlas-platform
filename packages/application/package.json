@@ -1,0 +1,25 @@
+{
+  "name": "@codeatlas/application",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Application layer: use cases and ports per bounded context (ADR-0011).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    "./shared-kernel": "./src/shared-kernel/index.ts",
+    "./identity": "./src/identity/index.ts",
+    "./workspaces": "./src/workspaces/index.ts",
+    "./repositories": "./src/repositories/index.ts",
+    "./analysis": "./src/analysis/index.ts",
+    "./exploration": "./src/exploration/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@codeatlas/domain": "workspace:*"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*"
+  }
+}

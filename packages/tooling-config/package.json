@@ -1,0 +1,13 @@
+{
+  "name": "@codeatlas/tooling-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Tooling: shared tsconfig and architecture boundary rules (FND-05).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./dependency-cruiser": "./dependency-cruiser.cjs",
+    "./dependency-matrix": "./dependency-matrix.json"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "@codeatlas/worker",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Presentation + composition root: BullMQ job worker.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@codeatlas/domain": "workspace:*",
+    "@codeatlas/application": "workspace:*",
+    "@codeatlas/persistence": "workspace:*",
+    "@codeatlas/messaging": "workspace:*",
+    "@codeatlas/engine-client": "workspace:*",
+    "@codeatlas/ai-providers": "workspace:*",
+    "@codeatlas/source-control": "workspace:*",
+    "@codeatlas/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*"
+  }
+}

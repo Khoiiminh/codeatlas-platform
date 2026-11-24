@@ -1,0 +1,14 @@
+{
+  "name": "@codeatlas/web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Presentation: Next.js UI (light layering). Talks to apps/api over HTTP only.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "dependencies": {
+    "@codeatlas/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*"
+  }
+}

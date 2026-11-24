@@ -1,0 +1,15 @@
+{
+  "$comment": "Machine-readable copy of the dependency matrix in docs/architecture/README.md (ADR-0011). Keys are workspace folders; values are the @codeatlas/* packages each may list in package.json. @codeatlas/tooling-config is allowed everywhere. Checked by tests/architecture/check-manifests.ts.",
+  "packages/domain": [],
+  "packages/application": ["domain"],
+  "packages/persistence": ["domain", "application"],
+  "packages/messaging": ["domain", "application"],
+  "packages/engine-client": ["domain", "application", "contracts"],
+  "packages/ai-providers": ["domain", "application"],
+  "packages/source-control": ["domain", "application"],
+  "packages/contracts": [],
+  "packages/tooling-config": [],
+  "apps/api": ["domain", "application", "persistence", "messaging", "engine-client", "ai-providers", "source-control", "contracts"],
+  "apps/worker": ["domain", "application", "persistence", "messaging", "engine-client", "ai-providers", "source-control", "contracts"],
+  "apps/web": ["contracts"]
+}

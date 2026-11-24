@@ -1,0 +1,21 @@
+{
+  "name": "@codeatlas/messaging",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Adapter (driven): implements application ports (ADR-0011).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "@codeatlas/domain": "workspace:*",
+    "@codeatlas/application": "workspace:*"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*"
+  }
+}
