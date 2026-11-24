@@ -1,0 +1,23 @@
+{
+  "name": "codeatlas-platform",
+  "version": "0.0.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "packageManager": "pnpm@11.28.11",
+  "engines": {
+    "node": ">=26.13.1"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --if-present typecheck",
+    "check:manifests": "node tests/architecture/check-manifests.ts",
+    "check:imports": "depcruise apps packages --config packages/tooling-config/dependency-cruiser.cjs",
+    "check:architecture": "pnpm check:manifests && pnpm check:imports"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*",
+    "@types/node": "26.6.6",
+    "dependency-cruiser": "18.9.0",
+    "typescript": "6.0.3"
+  }
+}

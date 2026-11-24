@@ -1,0 +1,17 @@
+{
+  "name": "@codeatlas/contracts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Generated engine contract types (adapter-level only; ADR-0011 rule 4).",
+  "license": "UNLICENSED",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@codeatlas/tooling-config": "workspace:*"
+  }
+}
