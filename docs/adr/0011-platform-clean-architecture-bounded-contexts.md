@@ -1,6 +1,6 @@
 # ADR-0011: Platform Clean Architecture, bounded contexts and package dependency rule
-- Status: Proposed
-- Date: 2026-11-24
+- Status: Accepted
+- Date: 2026-11-25
 - Decision owners: Platform maintainers
 - Repository scope: platform
 - Supersedes: none
@@ -32,14 +32,30 @@ Initial contexts: `identity`, `workspaces`, `repositories`, `analysis`, `explora
 
 Rules:
 
-1. Dependencies point inward only. The matrix in [`docs/architecture/README.md`](../architecture/README.md) is normative.
+1. Dependencies point inward only, as defined by the **dependency matrix below, which is normative**.
 2. Ports are declared in `packages/application`. Only `apps/api` and `apps/worker` bind adapters to ports (Nest modules / worker bootstrap).
 3. `packages/domain` and `packages/application` import no framework, ORM, queue, HTTP, LLM SDK or generated contract types.
-4. Adapter packages do not import each other. Only `engine-client` imports `packages/contracts`.
-5. Contexts interact only through each other's public `index.ts`, never internals or tables.
+4. Adapter packages do not import each other. Among `packages/*`, only `engine-client` imports `packages/contracts`. The composition roots `apps/api` and `apps/worker` may also import it, to map HTTP and job payloads, and `apps/web` may import contract types only.
+5. Domain contexts import only their own context and `shared-kernel`. Application contexts call each other only through the other context's public `index.ts`. No context touches another's internals or tables.
 6. Every use case receives an explicit actor/tenant context. Tenant scoping is enforced in application use cases and again in `persistence` queries (defence in depth).
-7. `apps/web` has light layering (UI → feature hooks/view models → typed API client). It calls `apps/api` over HTTP only and never imports domain, application or adapter packages.
-8. The platform `analysis` context models jobs and snapshot metadata only. Parsing, graph algorithms and impact computation remain in the engine (ADR-0009).
+7. `apps/web` has light layering (UI → feature hooks/view models → typed API client). It calls `apps/api` over HTTP only. It never imports domain, application or adapter packages, and from `packages/contracts` it imports types only.
+8. Direct query-port exception (Blueprint v1.3 §2.3): a trivial read endpoint may call a query port directly from a controller when no authorization, validation or orchestration is involved. Such cases are documented in the module.
+9. The platform `analysis` context models jobs and snapshot metadata only. Parsing, graph algorithms and impact computation remain in the engine (ADR-0009).
+
+### Dependency matrix (normative)
+
+✔ = allowed; blank = forbidden.
+
+| Package ↓ may import → | domain | application | adapters | contracts | apps |
+|---|:-:|:-:|:-:|:-:|:-:|
+| `packages/domain` | own context + `shared-kernel` | | | | |
+| `packages/application` | ✔ | own context; others via public `index.ts` | | | |
+| adapters (`persistence`, `messaging`, `engine-client`, `ai-providers`, `source-control`) | ✔ | ✔ | | `engine-client` only | |
+| `packages/contracts` | | | | | |
+| `apps/api`, `apps/worker` | ✔ | ✔ | ✔ | ✔ | |
+| `apps/web` | | | | ✔ (types) | |
+
+`tooling-config` is a development dependency that every package may use. Copies that must match the matrix: [`docs/architecture/README.md`](../architecture/README.md) (for readers), plus `packages/tooling-config/dependency-matrix.json` and `dependency-cruiser.cjs` (enforced). Changes to this matrix are made by amending this ADR in the same pull request that updates its copies. A change that adds an edge (a new layer exception) needs review by the decision owners before merge (Traceable Implementation Plan §10 rule 7). The amendment is recorded with its date under "Implementation and verification".
 
 Scaffold renames: `packages/database` → `packages/persistence`, `packages/ai` → `packages/ai-providers`. New packages: `packages/domain`, `packages/application`, `packages/messaging`, `packages/source-control`. New top-level folders: `infrastructure/`, `tests/{integration,contract,security,architecture}`, `docs/architecture/`.
 
@@ -69,5 +85,5 @@ Scaffold renames: `packages/database` → `packages/persistence`, `packages/ai` 
 
 - Architecture Blueprint v1.3 §1.2, §2, §4
 - Traceable Implementation Plan v1.2: FND-01, FND-05, WEB-01, AI-01/02, HOST-01..03
-- ADR-0003 (hybrid execution), ADR-0006 (persistence), ADR-0008 (evidence-first AI), ADR-0009 (multi-repository)
-- Sibling layering decisions: ADR-0010 (`codeatlas-engine`), ADR-0012 (`codeatlas-vscode`)
+- [ADR-0003](https://github.com/Khoiiminh/codeatlas-engine/blob/development/docs/adr/0003-hybrid-execution.md) (hybrid execution), [ADR-0006](https://github.com/Khoiiminh/codeatlas-engine/blob/development/docs/adr/0006-persistence-strategy.md) (persistence), [ADR-0008](0008-evidence-first-ai.md) (evidence-first AI), [ADR-0009](https://github.com/Khoiiminh/codeatlas-engine/blob/development/docs/adr/0009-multi-repository-architecture.md) (multi-repository)
+- Sibling layering decisions: [ADR-0010](https://github.com/Khoiiminh/codeatlas-engine/blob/development/docs/adr/0010-engine-clean-architecture-layering.md) (`codeatlas-engine`), [ADR-0012](https://github.com/Khoiiminh/codeatlas-vscode/blob/development/docs/adr/0012-vscode-extension-layering.md) (`codeatlas-vscode`)
