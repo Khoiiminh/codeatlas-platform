@@ -195,7 +195,7 @@ importers:
 packages:
 
   '@codeatlas/contracts@file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz':
-    resolution: {integrity: sha512-+Dw2epJHxw5ydcev8IL3YXxyABACsjrXyRIUzMQW2VnNUa6bvgcq/aSfu9xO7dZAFz3fmojj5hSxNxStwQoCVw==, tarball: file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz}
+    resolution: {integrity: sha512-dHHuVDvFuCunLGDTwZ6UtJ8D19CwnTGnaakIw1Hs2V+PUzJScDfjQGqzIpWSQ1btsiARrmyPLULvvyKB8n0jqQ==, tarball: file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz}
     version: 0.1.0
 
   '@types/node@26.6.6':
