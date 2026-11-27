@@ -25,6 +25,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm typecheck
+      - name: Formatting (Prettier, 4-space indent)
+        run: pnpm format:check
 
   # Required check (FND-05, ADR-0011): manifests and imports must match docs/architecture/README.md.
   architecture:

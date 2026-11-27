@@ -12,12 +12,15 @@
     "typecheck": "pnpm -r --if-present typecheck",
     "check:manifests": "node tests/architecture/check-manifests.ts",
     "check:imports": "depcruise apps packages --config packages/tooling-config/dependency-cruiser.cjs",
-    "check:architecture": "pnpm check:manifests && pnpm check:imports"
+    "check:architecture": "pnpm check:manifests && pnpm check:imports",
+    "format": "prettier --write \"**/*.{ts,mts,cts,tsx,js,mjs,cjs}\"",
+    "format:check": "prettier --check \"**/*.{ts,mts,cts,tsx,js,mjs,cjs}\""
   },
   "devDependencies": {
     "@codeatlas/tooling-config": "workspace:*",
     "@types/node": "26.6.6",
     "dependency-cruiser": "18.9.0",
+    "prettier": "3.10.1",
     "typescript": "6.0.3"
   }
 }

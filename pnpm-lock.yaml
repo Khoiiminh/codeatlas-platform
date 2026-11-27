@@ -17,6 +17,9 @@ importers:
       dependency-cruiser:
         specifier: 18.9.0
         version: 18.9.0
+      prettier:
+        specifier: 3.10.1
+        version: 3.10.1
       typescript:
         specifier: 6.0.3
         version: 6.0.3
@@ -117,6 +120,10 @@ importers:
         version: link:../tooling-config
 
   packages/contracts:
+    dependencies:
+      codeatlas-engine-contracts:
+        specifier: file:vendor/codeatlas-contracts-0.1.0.tgz
+        version: '@codeatlas/contracts@file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz'
     devDependencies:
       '@codeatlas/tooling-config':
         specifier: workspace:*
@@ -186,6 +193,10 @@ importers:
   packages/tooling-config: {}
 
 packages:
+
+  '@codeatlas/contracts@file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz':
+    resolution: {integrity: sha512-+Dw2epJHxw5ydcev8IL3YXxyABACsjrXyRIUzMQW2VnNUa6bvgcq/aSfu9xO7dZAFz3fmojj5hSxNxStwQoCVw==, tarball: file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz}
+    version: 0.1.0
 
   '@types/node@26.6.6':
     resolution: {integrity: sha512-MzQj+8Kx3XI40OmUAE6Qoh58ZMNstNNMwn2nfd3qWsfe7nDNSqJNzes4njhz6AHwrSHOffSLwXU6yb474Q4aog==}
@@ -304,6 +315,11 @@ packages:
     resolution: {integrity: sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA==}
     engines: {node: '>=12'}
 
+  prettier@3.10.1:
+    resolution: {integrity: sha512-70vp3ZUYoPlFbF9uiTdXHUUCGEIp7d4+6p+8DYbkm2jP7x/3i/paXVF6dopSI3zd/CEitrZN1rc4i85xWmmXlg==}
+    engines: {node: '>=14'}
+    hasBin: true
+
   prompts@2.4.2:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
@@ -370,6 +386,8 @@ packages:
     hasBin: true
 
 snapshots:
+
+  '@codeatlas/contracts@file:packages/contracts/vendor/codeatlas-contracts-0.1.0.tgz': {}
 
   '@types/node@26.6.6':
     dependencies:
@@ -476,6 +494,8 @@ snapshots:
   path-parse@1.0.7: {}
 
   picomatch@4.0.7: {}
+
+  prettier@3.10.1: {}
 
   prompts@2.4.2:
     dependencies:
