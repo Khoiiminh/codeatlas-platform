@@ -1,8 +1,8 @@
 {
   "name": "@codeatlas/contracts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
-  "description": "Generated engine contract types (adapter-level only; ADR-0011 rule 4).",
+  "description": "Pins the engine contract artifact @codeatlas/contracts 0.1.0 (vendor/) and re-exports it; adapter-level only (ADR-0011 rule 4).",
   "license": "UNLICENSED",
   "type": "module",
   "exports": {
@@ -10,6 +10,9 @@
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json"
+  },
+  "dependencies": {
+    "codeatlas-engine-contracts": "file:vendor/codeatlas-contracts-0.1.0.tgz"
   },
   "devDependencies": {
     "@codeatlas/tooling-config": "workspace:*"

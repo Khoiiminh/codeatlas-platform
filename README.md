@@ -44,10 +44,11 @@ pnpm and Node versions are pinned in `package.json` (`packageManager`) and `.nod
 ```sh
 pnpm install
 pnpm typecheck
+pnpm format:check         # Prettier, 4-space indent (pnpm format fixes it)
 pnpm check:architecture   # manifest + import boundary checks (tests/architecture)
 ```
 
-CI (`.github/workflows/ci.yml`) runs the jobs `typecheck` and `architecture`. Mark both as required in branch protection.
+CI (`.github/workflows/ci.yml`) runs the jobs `typecheck` (which also checks formatting) and `architecture`. Mark both as required in branch protection.
 
 ## Decision records
 

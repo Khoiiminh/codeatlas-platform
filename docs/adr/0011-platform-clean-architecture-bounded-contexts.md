@@ -77,6 +77,7 @@ Scaffold renames: `packages/database` → `packages/persistence`, `packages/ai` 
 - FND-05: `pnpm check:architecture` as the required CI job `architecture`. It runs two checks: `tests/architecture/check-manifests.ts` against `packages/tooling-config/dependency-matrix.json`, and dependency-cruiser with `packages/tooling-config/dependency-cruiser.cjs`. A deliberately introduced violation must fail CI. Verified on 2026-11-24 with injected probes, all rejected:
   - one forbidden manifest dependency;
   - eight forbidden imports: domain → adapter, cross-context domain, `node:fs` in domain, application deep cross-context, adapter → adapter, `contracts` in a non-engine adapter, web → domain, and worker → api.
+- Amendment (2026-11-25, FND-03): the dependency-cruiser option `exclude` dropped every `node_modules` edge, so `inner-layers-free-of-infrastructure` could never fire. It now excludes only per-package `node_modules`, `dist`, `.next` and `coverage` folders. A probe import of an installed package from `packages/domain` is now rejected. New rule `engine-contract-artifact-only-via-contracts`: only `packages/contracts` imports the vendored engine artifact. The matrix is unchanged.
 - WEB-01 introduces the first context end to end (domain → application → controller) as the reference pattern.
 - HOST-02: `packages/persistence` passes the engine's published port behaviour fixtures.
 - HOST-03: cross-tenant tests target application use cases and persistence adapters.
